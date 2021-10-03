@@ -5,7 +5,6 @@ import Home from './pages/Home/index';
 import Survey from './pages/Survey/index';
 import Header from './components/Header/index';
 import Error from './components/Error/index';
-import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
