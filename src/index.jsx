@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home/index';
 import Survey from './pages/Survey/index';
+import Freelances from './pages/Freelances/index';
+import Results from './pages/Results/index';
 import Header from './components/Header/index';
 import Error from './components/Error/index';
 
@@ -16,6 +18,12 @@ ReactDOM.render(
         </Route>
         <Route path="/survey/:questionNumber">
           <Survey />
+        </Route>
+        <Route path="/freelances">
+          <Freelances />
+        </Route>
+        <Route path="/results">
+          <Results />
         </Route>
         <Route>
           <Error />
