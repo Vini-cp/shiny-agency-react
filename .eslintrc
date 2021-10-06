@@ -1,8 +1,8 @@
-{
-  "extends": ["airbnb"],
-  "rules": {
-    "no-console": "error",
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-one-expression-per-line": "off"
-  }
-}
+// {
+//   "extends": ["airbnb"],
+//   "rules": {
+//     "no-console": "error",
+//     "react/react-in-jsx-scope": "off",
+//     "react/jsx-one-expression-per-line": "off"
+//   }
+// }
