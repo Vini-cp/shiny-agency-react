@@ -1,13 +1,26 @@
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import colors from '../../utils/style/colors';
+
+const StyledLink = styled(Link)`
+    padding: 15px;
+    color: #8186a0;
+    text-decoration: none;
+    font-size: 18px;
+    ${( {isFullLink} ) =>
+        isFullLink && 
+        `color: white; border-radius: 30px; background-color: ${colors.primary};`}
+`;
 
 function Header() {
   return (
     <nav>
-      <Link to="/">Accueil </Link>
-      <Link to="/survey/1"> Questionnaire </Link>
-      <Link to="/freelances"> Freelances </Link>
+      {/* <StyledLink to="/" isFullLink={true}>Accueil </StyledLink> */}
+      <StyledLink to="/" >Accueil </StyledLink>
+      <StyledLink to="/survey/1"> Questionnaire </StyledLink>
+      <StyledLink to="/freelances"> Freelances </StyledLink>
     </nav>
-  );
+  );s
 }
 
 export default Header;
