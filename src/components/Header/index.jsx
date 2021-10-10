@@ -63,7 +63,7 @@ function Header() {
         </NavText>
       </NavigationDiv>
     </StyledHeader>
-  );s
+  );
 }
 
 export default Header;
