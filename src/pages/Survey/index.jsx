@@ -1,7 +1,9 @@
-import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Navigation from '../../components/Navigation';
 import colors from '../../utils/style/colors';
+import Loader from '../../utils/Atoms'
 
 const Header = styled.h2`
   position: absolute;
@@ -81,11 +83,29 @@ const ButtonText = styled.p`
 
 function Survey() {
   const { questionNumber } = useParams();
+  const [surveyData, setSurveyData] = useState({})
+  const [isDataLoading, setDataLoading] = useState(false)
+
+  useEffect(() => {
+    setDataLoading(true)
+    fetch(`http://localhost:8000/survey`)
+        .then((response) => response.json()
+        .then(({ surveyData }) => {
+          setSurveyData(surveyData)
+          setDataLoading(false)
+        })
+        .catch((error) => console.log(error))
+    )
+  }, [])
 
   return (
     <div>
       <Header>Question {questionNumber}</Header>
-      <Text>Does your app have to appear first in search results?</Text>
+      {isDataLoading ? (
+        <Loader />
+      ) : (
+        <Text>{surveyData[questionNumber]}</Text>
+      )}
       <ButtonYes type="button"><ButtonText>Yes</ButtonText></ButtonYes>
       <ButtonNo type="button"><ButtonText>No</ButtonText></ButtonNo>
       <Navigation questionNumber={questionNumber}></Navigation>      
