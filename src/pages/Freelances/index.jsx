@@ -1,30 +1,7 @@
-import DefaultPicture from '../../assets/profile.png';
+import { useState, useEffect } from 'react';
 import Card from '../../components/Card';
 import styled from 'styled-components';
 import colors from '../../utils/style/colors'
-
-const freelanceProfiles = [
-  {
-    name: 'Jane Doe',
-    jobTitle: 'Devops',
-    picture: DefaultPicture,
-  },
-  {
-    name: 'John Doe',
-    jobTitle: 'Developpeur frontend',
-    picture: DefaultPicture,
-  },
-  {
-    name: 'Jeanne Biche',
-    jobTitle: 'Développeuse Fullstack',
-    picture: DefaultPicture,
-  },
-  {
-    name: 'Jeanne Biche',
-    jobTitle: 'Développeur backend',
-    picture: DefaultPicture,
-  },
-];
 
 const Title = styled.p`
   position: absolute;
@@ -73,15 +50,30 @@ const CardsContainer = styled.div`
 `
 
 function Freelances() {
+  const [freelanceProfiles, setFreelanceProfiles] = useState([])
+  const [isDataLoading, setDataLoading] = useState(false)
+
+  useEffect(() => {
+    setDataLoading(true)
+    fetch(`http://localhost:8000/freelances`)
+        .then((response) => response.json()
+        .then(({freelancersList}) => {
+          setFreelanceProfiles(freelancersList)
+          setDataLoading(false)
+        })
+        .catch((error) => console.log(error))
+    )
+  }, [])
+
   return (
     <div>
       <Title>Find your provider</Title>
       <SubTitle>At Shiny we bring together the best profiles for you.</SubTitle>
       <CardsContainer>
-        {freelanceProfiles.map((profile, index) => (
+        {freelanceProfiles.map((profile) => (
           <Card
-            key={`${profile.name}-${index}`}
-            label={profile.jobTitle}
+            key={`${profile.name}-${profile.id}`}
+            label={profile.job}
             picture={profile.picture}
             title={profile.name}
           />
